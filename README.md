@@ -23,6 +23,8 @@ Requirements
   install whatever server you want to run **after** running this role so it can
   use the generated certificates.
 
+* Chose your provider and set its API endpoint in `acmetool_server`, see below.
+
 Role Variables
 --------------
 ## Required
@@ -37,6 +39,11 @@ acmetool_domains: "www.example.com example.com"
 ```yaml
 # URL of the LetsEncrypt agreement to accept
 acmetool_agreement_url: "https://example.com/TOS.pdf"
+
+# CA server. This defaults to the acme-staging server for testing purposes.
+# You will need to change this to the production server :
+# https://acme-v01.api.letsencrypt.org/directory
+acmetool_server: "https://acme.example.com/directory"
 ```
 
 Example Playbook
