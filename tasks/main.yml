@@ -40,7 +40,7 @@
     mode=0644
 
 - name: Setup acmetool
-  become_user: acme
+  become_user: "acme"
   become: true
   command: acmetool quickstart --batch
 
@@ -67,7 +67,7 @@
 - name: Start redirector service
   command: systemctl start acmetool.service
 
-- name: Ask certificates
-  become_user: acme
+- name: Generate certificates
+  become_user: "acme"
   become: true
   command: acmetool want --batch "{{acmetool_domains}}"
