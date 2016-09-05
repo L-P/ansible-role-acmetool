@@ -1,0 +1,10 @@
+[Unit]
+Description=Acmetool Redirector
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/acmetool redirector --batch
+User=acme
+
+[Install]
+WantedBy=multi-user.target

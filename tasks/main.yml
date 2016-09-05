@@ -1,0 +1,71 @@
+---
+- name: Add acmetool PPA
+  apt_repository:
+    repo="ppa:hlandau/rhea"
+
+- name: Install acmetool
+  apt:
+    name="acmetool"
+
+- name: Add capabilities to executable
+  capabilities:
+    path="/usr/bin/acmetool"
+    capability="cap_net_bind_service+ep"
+
+- name: Add acme user
+  user:
+    name="acme"
+    shell="/usr/sbin/nologin"
+    password="!"
+
+- name: Create directories
+  file:
+    path="{{item}}"
+    owner="acme"
+    group="acme"
+    state="directory"
+  with_items:
+    - "/var/run/acme"
+    - "/var/lib/acme"
+    - "/var/lib/acme/conf"
+
+- name: Copy configuration
+  template:
+    src="responses.j2"
+    dest="/var/lib/acme/conf/responses"
+    owner="acme"
+    group="acme"
+    mode=0644
+
+- name: Setup acmetool
+  become_user: acme
+  become: true
+  command: acmetool quickstart --batch
+
+- name: Allow HTTP through UFW
+  ufw:
+    rule=allow
+    proto=tcp
+    to_port=80
+
+- name: Add acmetool redirector service
+  copy:
+    src="acmetool.service"
+    dest="/etc/systemd/system/acmetool.service"
+    owner="root"
+    group="root"
+    mode="0644"
+
+- name: Reload systemctl
+  command: systemctl daemon-reload
+
+- name: Enable redirector service
+  command: systemctl enable acmetool.service
+
+- name: Start redirector service
+  command: systemctl start acmetool.service
+
+- name: Ask certificates
+  become_user: acme
+  become: true
+  command: acmetool want --batch "{{acmetool_domains}}"
