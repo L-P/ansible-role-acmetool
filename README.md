@@ -17,7 +17,7 @@ Requirements
 * `become: true` is required as most actions need to be run as root, the rest
   is run under `acme` which will be created by the role.
 
-* `ufw` is expected to be present, it was not installed by default on my system.
+* You need to open port 80/TCP for `acmetool` to serve challenges.
 
 * As the `redirector` mode is used, no HTTP server is required to run. You can
   install whatever server you want to run **after** running this role so it can

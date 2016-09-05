@@ -44,12 +44,6 @@
   become: true
   command: acmetool quickstart --batch
 
-- name: Allow HTTP through UFW
-  ufw:
-    rule=allow
-    proto=tcp
-    to_port=80
-
 - name: Add acmetool redirector service
   copy:
     src="acmetool.service"
