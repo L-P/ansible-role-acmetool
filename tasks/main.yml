@@ -64,4 +64,4 @@
 - name: Generate certificates
   become_user: "acme"
   become: true
-  command: acmetool want --batch "{{acmetool_domains}}"
+  command: acmetool want --batch {{acmetool_domains}}
