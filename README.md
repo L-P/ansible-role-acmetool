@@ -44,7 +44,7 @@ Example Playbook
 ```yaml
 - hosts: all
   roles:
-    - { role: "acmetool", become: true }
+    - { role: "L-P.acmetool", become: true }
 ```
 
 License
