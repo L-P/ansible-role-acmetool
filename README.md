@@ -1,6 +1,8 @@
 # ansible-role-acmetool
 Install, configure and run `acmetool` to generate Let's Encrypt TLS certificates.
 
+See [acme](https://github.com/hlandau/acme) on GitHub for details.
+
 ## Requirements
 This was only tested on an ARM version of Ubuntu 16.04.  
 Acmetool needs to be run as a regular user on ARM because it can't drop
