@@ -17,6 +17,8 @@
     name="acme"
     shell="/usr/sbin/nologin"
     password="!"
+    system=yes
+    createhome=no
 
 - name: Create directories
   file:
