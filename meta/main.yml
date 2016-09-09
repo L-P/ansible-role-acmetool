@@ -2,7 +2,7 @@
 dependencies: []
 galaxy_info:
   author: "Léo Peltier"
-  description: "Install acmetool on Ubuntu 16.04 ARM"
+  description: "Install acmetool on Ubuntu 16.04"
   license: "MIT"
   galaxy_tags: ["le", "letsencrypt", "acme", "acmetool", "https", "ssl", "tls"]
 

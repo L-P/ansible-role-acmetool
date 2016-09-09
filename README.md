@@ -10,10 +10,6 @@ See [acme](https://github.com/hlandau/acme) on GitHub for details.
 
 Requirements
 ------------
-* This was only tested on an ARM version of Ubuntu 16.04.  Acmetool needs to be
-  run as a regular user on ARM because it can't drop privileges, this role was
-  specifically made to run acmetool as its own user.
-
 * `become: true` is required as most actions need to be run as root, the rest
   is run under `acme` which will be created by the role.
 
