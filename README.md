@@ -40,6 +40,9 @@ acmetool_agreement_url: "https://example.com/TOS.pdf"
 # You will need to change this to the production server :
 # https://acme-v01.api.letsencrypt.org/directory
 acmetool_server: "https://acme.example.com/directory"
+
+# Change this to RSA if your server does not support EC keys (eg. murmur).
+acmetool_key_type: "ecdsa"
 ```
 
 Example Playbook
