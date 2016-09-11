@@ -43,6 +43,9 @@ acmetool_server: "https://acme.example.com/directory"
 
 # Change this to RSA if your server does not support EC keys (eg. murmur).
 acmetool_key_type: "ecdsa"
+
+# If you don't trust acmetool to run hooks as root, set this to false.
+acmetool_enable_hooks: false
 ```
 
 Example Playbook
