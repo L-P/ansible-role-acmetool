@@ -21,6 +21,8 @@ Requirements
 
 * Chose your provider and set its API endpoint in `acmetool_server`, see below.
 
+* The `cron` package is required for automatic renewal.
+
 Role Variables
 --------------
 ## Required
