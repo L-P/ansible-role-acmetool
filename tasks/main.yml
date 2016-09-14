@@ -85,15 +85,17 @@
     owner="root"
     group="root"
     mode="0644"
+  register: result
 
 - name: Reload systemctl
   command: systemctl daemon-reload
+  when: "result.changed"
 
-- name: Enable redirector service
-  command: systemctl enable acmetool.service
-
-- name: Start redirector service
-  command: systemctl start acmetool.service
+- name: Start acmetool
+  service:
+    name="acmetool"
+    state="started"
+    enabled=yes
 
 - name: Generate certificates
   become_user: "acme"
