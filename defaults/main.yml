@@ -3,3 +3,8 @@ acmetool_agreement_url: "https://letsencrypt.org/documents/LE-SA-v1.1.1-August-1
 acmetool_server: "https://acme-staging.api.letsencrypt.org/directory"
 acmetool_key_type: "ecdsa"
 acmetool_enable_hooks: true
+acmetool_method: "redirector"
+acmetool_install_cronjob: true
+acmetool_install_haproxy_script: false
+acmetool_rsa_key_size: 4096
+acmetool_ecdsa_curve: "nistp256"

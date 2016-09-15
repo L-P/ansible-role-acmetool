@@ -1,11 +1,11 @@
 "acme-enter-email": "{{acmetool_email}}"
 "acme-agreement:{{acmetool_agreement_url}}": true
 "acmetool-quickstart-choose-server": "{{acmetool_server}}"
-"acmetool-quickstart-choose-method": redirector
+"acmetool-quickstart-choose-method": "{{acmetool_method}}"
 "acmetool-quickstart-complete": true
-"acmetool-quickstart-install-cronjob": true
-"acmetool-quickstart-install-haproxy-script": true
-"acmetool-quickstart-install-redirector-systemd": true
+"acmetool-quickstart-install-cronjob": {{acmetool_install_cronjob}}
+"acmetool-quickstart-install-haproxy-script": {{acmetool_install_haproxy_script}}
+"acmetool-quickstart-install-redirector-systemd": false
 "acmetool-quickstart-key-type": "{{acmetool_key_type}}"
-"acmetool-quickstart-rsa-key-size": 4096
-"acmetool-quickstart-ecdsa-curve": nistp256
+"acmetool-quickstart-rsa-key-size": {{acmetool_rsa_key_size}}
+"acmetool-quickstart-ecdsa-curve": "{{acmetool_ecdsa_curve}}"
