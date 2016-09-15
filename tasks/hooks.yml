@@ -1,0 +1,34 @@
+---
+- name: Get hooks
+  command: "ls /usr/lib/acme/hooks"
+  register: hooks
+  changed_when: false
+  when: not acmetool_enable_hooks
+
+- name: Remove hooks
+  file:
+    path="/usr/lib/acme/hooks/{{item}}"
+    state="absent"
+  with_items: "{{hooks.stdout_lines}}"
+  when: not acmetool_enable_hooks
+
+- name: Make hooks root-owned
+  file:
+    path="/usr/lib/acme/hooks"
+    owner="root"
+    group="root"
+    recurse="true"
+  when: acmetool_enable_hooks
+
+- name: Setuid hooks
+  file:
+    path="/usr/lib/acme/hooks/{{item}}"
+    owner="root"
+    group="root"
+    mode="u+s"
+  with_items: "{{hooks.stdout_lines}}"
+  when: acmetool_enable_hooks
+
+- name: Add acme hooks to sudoers
+  lineinfile: "dest='/etc/sudoers' line='acme ALL=(root) NOPASSWD: /usr/lib/acme/hooks/'"
+  when: acmetool_enable_hooks

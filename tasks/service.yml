@@ -1,0 +1,24 @@
+---
+- name: Add acmetool redirector service
+  copy:
+    src="acmetool.service"
+    dest="/etc/systemd/system/acmetool.service"
+    owner="root"
+    group="root"
+    mode="0644"
+  register: result
+
+- name: Reload systemctl
+  command: systemctl daemon-reload
+  when: "result.changed"
+
+- name: Start acmetool
+  service:
+    name="acmetool"
+    state="started"
+    enabled=yes
+
+- name: Generate certificates
+  become_user: "acme"
+  become: true
+  command: acmetool want --batch {{acmetool_domains}}

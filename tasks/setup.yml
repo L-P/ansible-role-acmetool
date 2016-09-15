@@ -1,0 +1,46 @@
+---
+- name: Add acmetool PPA
+  apt_repository:
+    repo="ppa:hlandau/rhea"
+
+- name: Install acmetool
+  apt:
+    name="acmetool"
+
+- name: Add capabilities to executable
+  capabilities:
+    path="/usr/bin/acmetool"
+    capability="cap_net_bind_service+ep"
+
+- name: Add acme user
+  user:
+    name="acme"
+    shell="/usr/sbin/nologin"
+    password="!"
+    system=yes
+    createhome=no
+
+- name: Create directories
+  file:
+    path="{{item}}"
+    owner="acme"
+    group="acme"
+    state="directory"
+  with_items:
+    - "/var/run/acme"
+    - "/var/lib/acme"
+    - "/var/lib/acme/conf"
+    - "/usr/lib/acme/hooks"
+
+- name: Copy configuration
+  template:
+    src="responses.j2"
+    dest="/var/lib/acme/conf/responses"
+    owner="acme"
+    group="acme"
+    mode=0644
+
+- name: Setup acmetool
+  become_user: "acme"
+  become: true
+  command: acmetool quickstart --batch
