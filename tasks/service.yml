@@ -17,8 +17,3 @@
     name="acmetool"
     state="started"
     enabled=yes
-
-- name: Generate certificates
-  become_user: "acme"
-  become: true
-  command: acmetool want --batch {{acmetool_domains}}

@@ -44,3 +44,5 @@
   become_user: "acme"
   become: true
   command: acmetool quickstart --batch
+  register: result
+  changed_when: "result.stdout"

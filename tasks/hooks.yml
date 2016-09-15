@@ -3,7 +3,6 @@
   command: "ls /usr/lib/acme/hooks"
   register: hooks
   changed_when: false
-  when: not acmetool_enable_hooks
 
 - name: Remove hooks
   file:

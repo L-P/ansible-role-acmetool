@@ -2,3 +2,10 @@
 - include: setup.yml
 - include: hooks.yml
 - include: service.yml
+
+- name: Generate certificates
+  become_user: "acme"
+  become: true
+  command: acmetool want --batch {{acmetool_domains}}
+  register: result
+  changed_when: "result.stdout"
