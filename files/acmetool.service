@@ -5,6 +5,9 @@ After=network.target
 [Service]
 ExecStart=/usr/bin/acmetool redirector --batch
 User=acme
+Restart=always
+RestartSec=30
+Type=notify
 
 [Install]
 WantedBy=multi-user.target
