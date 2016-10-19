@@ -57,6 +57,25 @@ Example Playbook
     - { role: "L-P.acmetool", become: true }
 ```
 
+Because on Debian services are automatically enabled and started with their
+default configuration when installed, nginx _will_ fail to install and leave
+dpkg in a semi-broken state.  
+To avoid this you can run the following play between the installation of
+acmetool and nginx. It will only run if nginx is not yet configured.
+
+```yaml
+- hosts: all
+    become: true
+    tasks:
+    - name: Stop acmetool
+      tags: "nginx"
+      command: "service acmetool stop"
+      args:
+        creates: "/etc/nginx/nginx.conf"
+```
+
+You can adapt this for any other service that fails the same way.
+
 License
 -------
 MIT
