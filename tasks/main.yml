@@ -1,7 +1,7 @@
 ---
-- include: setup.yml
+- include: acmetool_setup.yml
 - include: hooks.yml
-- include: service.yml
+- include: acmetool_service.yml
 
 - name: Generate certificates
   become_user: "acme"
